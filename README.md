@@ -1,6 +1,4 @@
-Absolutely — here’s your portfolio now enhanced with **programming languages** and **AI/Data Science concepts** used in each project. This version is structured for easy integration into a portfolio site and highlights your technical capabilities more clearly.
 
----
 
 ## 🧠 Data Scientist Portfolio
 
