@@ -105,7 +105,6 @@ This project combined technical execution with real-world value, aligning AI imp
 
 ### **2. Primary Root Detection (NPEC)**
 
-**Description:**
 Developed an image segmentation model to detect and quantify primary root structures from plant images for agricultural research.
 
 **Programming Languages/Tools:**
@@ -127,7 +126,6 @@ Developed an image segmentation model to detect and quantify primary root struct
 
 ### **Accident Detection & Analysis Using the CRISP-DM Cycle**
 
-**Description:**
 Applied the CRISP-DM methodology to analyze traffic accident data and build a prediction model for accident severity.
 
 **Programming Languages/Tools:**
@@ -150,7 +148,6 @@ Applied the CRISP-DM methodology to analyze traffic accident data and build a pr
 
 ### **Emotion Detection in Greek Sentences with Translation**
 
-**Description:**
 Developed an NLP system that translates Greek sentences to English and detects the underlying emotions.
 
 **Programming Languages/Tools:**
@@ -174,7 +171,6 @@ Developed an NLP system that translates Greek sentences to English and detects t
 
 ### **Impact of Chatbots on Small and Medium Enterprises (SMEs)**
 
-**Description:**
 Analyzed the adoption and effectiveness of chatbots in SMEs using both qualitative and quantitative data collection techniques.
 
 **Programming Languages/Tools:**
@@ -197,7 +193,6 @@ Analyzed the adoption and effectiveness of chatbots in SMEs using both qualitati
 
 ### **Computer Vision Model Deployment Across Multiple Platforms**
 
-**Description:**
 Deployed a computer vision model using various MLOps strategies including local execution, Azure ML Studio pipelines, and command-line deployment.
 
 **Programming Languages/Tools:**
