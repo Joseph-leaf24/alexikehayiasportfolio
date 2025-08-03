@@ -79,7 +79,7 @@ Developed image classification appliccation to detect classroom occupancy within
 
 The solution is designed to reduce booking conflicts, optimise space usage, and enhance the user experience for students and staff.
 
-To support transparency and ethical deployment, the model incorporates Explainable AI (XAI) techniques such as Grad-CAM to visualize which parts of the image influenced model predictions. These visualizations confirm the model’s focus on relevant regions (e.g., seats, human figures), ensuring fair and trustable outputs.
+To support transparency and ethical deployment, the model incorporates Explainable AI (XAI) techniques such as Grad-CAM to visualize which parts of the image influenced model predictions. These visualizations confirm the model’s focus on relevant regions (e.g., seats, human figures), enabling fair and trustable outputs.
 
 The system was designed to integrate with BUas’s booking tools, provide real-time availability insights, generate usage analytics dashboards for facilities teams, and support sustainability efforts through better space utilization. A strong emphasis was placed on privacy-first design, ensuring anonymized data handling throughout the pipeline.
 
@@ -103,22 +103,40 @@ This project combined technical execution with real-world value, aligning AI imp
 
 ---
 
-### **2. Primary Root Detection (NPEC)**
+## **Primary Root Detection and Measurement Pipeline (NPEC)**
 
-Developed an image segmentation model to detect and quantify primary root structures from plant images for agricultural research.
+- Engineered a full image-processing and AI pipeline to detect, segment, and measure primary root structures from plant imagery within petri dishes—supporting agricultural phenotyping and robotics-based inoculation at NPEC (Netherlands Plant Eco-phenotyping Centre).
 
-**Programming Languages/Tools:**
+- The pipeline performs automated image segmentation using a deep learning model (TensorFlow/Keras), followed by post-processing steps including morphological filtering, skeletonization, and component labeling to extract precise measurements of individual roots.
+- Roots are classified, measured, and linked to specific plants based on their spatial bin within the petri dish.
 
-* Python
-* OpenCV
-* Keras / PyTorch
+- It also included additional functionality such as accurate localization of root tips and origins using Euclidean skeleton path tracing.
 
-**AI/Data Science Concepts:**
+- Filtering for roots that are moderately vertical and of sufficient length, improving biological relevance.
+- Generation of skeleton overlays and annotated output images.
+- Projection of root tip coordinates into robotic arm coordinate space, enabling automated lab-based tasks (e.g., root inoculation using a reinforcement learning-controlled robotic agent).
 
-* Image Segmentation
-* Transfer Learning
-* Annotation & Preprocessing of Biological Imagery
-* Agriculture AI / Phenotyping
+- Export of root metadata (length, position, root ID) into structured formats for further research analysis.
+
+- The pipeline is optimized for batch processing, integrates Explainable AI techniques like overlay visualization, and aligns with smart agriculture initiatives by bridging AI-driven image analysis with physical automation in lab settings.
+
+**Programming Languages/Tools**
+1. Python
+2. OpenCV
+3. TensorFlow / Keras
+4. NumPy / SciPy / Skimage
+5. Stable-Baselines3 (PPO for Reinforcement Learning)
+6. Custom Robotics Environment (OT2Env)
+
+**AI/Data Science Concepts**
+1. Image Segmentation & Morphological Processing
+2. Skeletonization & Graph-Based Path Analysis
+3. Object Detection & Component Labeling
+4. Feature Extraction (Length, Tip/Start Localization)
+5. Coordinate Transformation (Image to Robot Space)
+6. Transfer Learning
+7. Automated Phenotyping in Agriculture
+8. Integration of AI & Robotics in Lab Automation
 
 ---
 
@@ -126,21 +144,34 @@ Developed an image segmentation model to detect and quantify primary root struct
 
 ### **Accident Detection & Analysis Using the CRISP-DM Cycle**
 
-Applied the CRISP-DM methodology to analyze traffic accident data and build a prediction model for accident severity.
+- Designed and deployed a full-stack driving risk prediction system using the CRISP-DM methodology, spanning all phases from business understanding to model deployment.
+- The solution is centered on classifying driving scenarios into four accident risk levels Low, Minor, Moderate, and Sever using a deep learning classifier built in Keras/TensorFlow.
+- The pipeline began with collecting and cleaning raw driving behavior data from a data lake, then selectively joining only relevant tables (e.g., GPS logs, speed metrics, accident histories) using SQL queries to form a refined dataset.
+- This cleaned and structured data was stored in a data warehouse, enabling consistent access for model training, monitoring, and future analytics.
+- SQL logic was also used for filtering out noise, aggregating event counts, and segmenting historical behavior by location and time.
 
-**Programming Languages/Tools:**
+- Multiple models were explored—starting with baseline classifiers like Logistic Regression and Decision Trees, then evolving into a custom deep neural network architecture with dropout layers, batch normalization, and L2 regularization to prevent overfitting.
+- After training, the best model was deployed in an interactive Streamlit web app, allowing users to simulate predictions and view real-time risk classifications based on GPS location, speed, and past accident counts.
+- The app includes login functionality, dynamic UI components, risk level visualizations, and debugging panels for transparency.
+- Data is scaled and processed on-the-fly before being passed to the model, with predictions shown alongside raw and normalized input values.
+- This project demonstrates end-to-end capability across data engineering, modeling, and deployment—blending cloud-scale data management with real-time AI.
 
-* Python (Pandas, NumPy, Scikit-learn)
-* Jupyter Notebook
-* Seaborn / Matplotlib
+**Programming Languages/Tools**
+1.  Python (Pandas, NumPy, Scikit-learn, TensorFlow/Keras)
+2. SQL (Data Lake → Warehouse ETL)
+3. Streamlit (Web App & Deployment)
+4. Seaborn / Matplotlib
 
-**AI/Data Science Concepts:**
-
-* CRISP-DM Lifecycle (Business Understanding → Deployment)
-* Classification Models (Decision Trees, Logistic Regression)
-* Feature Engineering
-* Data Visualization
-* Imbalanced Data Handling
+**AI/Data Science Concepts**
+1. CRISP-DM Lifecycle (Business Understanding → Deployment)
+2. Data Lake to Data Warehouse Transformation
+3. SQL Joins, Filtering, and Feature Aggregation
+4. Deep Learning for Multi-Class Classification
+5. Feature Engineering & Scaling
+6. Model Regularization (Dropout, L2, BatchNorm)
+7. Real-Time Prediction & Visualization
+8. Streamlit-Based Interactive Dashboards
+9. AI Deployment for Traffic Safety & Mobility Intelligence
 
 ---
 
@@ -148,22 +179,35 @@ Applied the CRISP-DM methodology to analyze traffic accident data and build a pr
 
 ### **Emotion Detection in Greek Sentences with Translation**
 
-Developed an NLP system that translates Greek sentences to English and detects the underlying emotions.
+Built a robust end-to-end NLP pipeline to extract, translate, and classify emotions from Greek-spoken YouTube videos—combining cutting-edge speech recognition, custom transformer models, and multilingual translation for emotion-aware content analysis.
 
-**Programming Languages/Tools:**
+The system takes a YouTube video as input, converts the audio to text using Whisper (large-v3) for transcription, translates the Greek transcript into English using a fine-tuned HuggingFace Greek-to-English transformer, and then predicts the emotion of each sentence using a custom bilingual emotion classification model. Each sentence is labeled with one of 7 emotions (anger, disgust, fear, happiness, neutral, sadness, surprise) along with an intensity score.
 
-* Python
-* HuggingFace Transformers
-* Google Translate API
-* NLTK / spaCy
+The pipeline is modular, scalable, and GPU-ready. It includes a custom OpenAI-powered scoring mechanism and was engineered to run efficiently on CUDA-enabled environments. The results are stored in a clean CSV output with aligned timestamps, raw and translated text, predicted emotion, and emotion intensity—enabling downstream analytics, content moderation, or sentiment-aware media indexing.
 
-**AI/Data Science Concepts:**
+**Key Capabilities**
+1. YouTube video → transcribed, translated, and emotion-tagged sentence-level output
+2. Handles real-world noisy audio with Whisper
+3. Works on Greek audio using multilingual models
+4. Supports emotion intensity scoring
+5. Compatible with OpenAI APIs and fine-tuned HuggingFace models
+6. Output saved as structured .csv for reporting or analytics
 
-* Multilingual NLP
-* Text Preprocessing & Tokenization
-* Machine Translation
-* Emotion Classification
-* Transformer Models (e.g., Multilingual BERT)
+**Programming Languages/Tools**
+1. Python
+2. HuggingFace Transformers
+3. OpenAI API (for scoring)
+4. Whisper (via whisper + FFmpeg)
+5. Pandas, tqdm, NumPy
+
+**AI/Data Science Concepts**
+1. Speech-to-Text (Whisper large-v3)
+2. Multilingual Machine Translation (Greek → English)
+3. Transformer-Based Emotion Classification
+4. Emotion Intensity Scoring
+5. Text Tokenization & Preprocessing
+5. Pipeline Engineering & GPU Acceleration
+6. Real-Time Content Understanding
 
 ---
 
@@ -171,45 +215,82 @@ Developed an NLP system that translates Greek sentences to English and detects t
 
 ### **Impact of Chatbots on Small and Medium Enterprises (SMEs)**
 
-Analyzed the adoption and effectiveness of chatbots in SMEs using both qualitative and quantitative data collection techniques.
+Conducted a full-scale mixed-methods research study to explore how chatbots influence customer satisfaction and trust in Small and Medium Enterprises (SMEs), using both quantitative and qualitative methodologies. This policy paper assessed chatbot effectiveness across four key service dimensions: personalization, accuracy, responsiveness, and functionality.
 
-**Programming Languages/Tools:**
+The quantitative component involved hypothesis-driven survey analysis, using techniques such as Cochran’s Q test, McNemar’s post-hoc test, Levene’s test, and effect size metrics (Cohen’s d and h). Data was cleaned, tested for normality, and analyzed using both descriptive and inferential statistics to determine how personalization levels and response times impacted perceived satisfaction.
 
-* Python (for data cleaning & basic analysis)
-* Excel / Google Sheets
-* Survey Tools (SurveyMonkey, Google Forms)
+The qualitative component employed semi-structured interviews and thematic analysis (Braun & Clarke, 2006) to uncover nuanced insights about user expectations, chatbot limitations, and the trust dynamics between human vs. chatbot interactions. Themes included “Accuracy as the Core of Trust,” “Speed vs. Personalization,” and “Expectations vs. Reality.”
 
-**AI/Data Science Concepts:**
+The study also performed a stakeholder analysis to guide SMEs on chatbot implementation strategies tailored to customer needs, resource constraints, and communication challenges.
 
-* Survey Data Analysis
-* Sentiment Analysis (Optional Add-On)
-* Business Intelligence (BI)
-* Human-AI Interaction
-* Research Methodologies
+**Key Deliverables**
+1. Statistical evidence linking chatbot personalization to customer satisfaction.
+2. Practical recommendations for SMEs on balancing speed, personalization, and accuracy.
+3. Actionable policy suggestions to improve chatbot design, escalation paths, and trust-building mechanisms.
+4. A stakeholder matrix identifying the impact of chatbot adoption across SME user groups (e.g., customers, employees, managers).
+
+**Programming Languages/Tools**
+1. Python (for survey data analysis and statistical testing)
+2. Excel / Google Sheets (for data cleaning and reporting)
+3. Survey Platforms (Qualatrics)
+4. AI/Data Science Concepts & Research Methods:
+5. Mixed-Methods Research (Quantitative + Qualitative)
+6. Survey Data Cleaning & Normality Testing
+7. Inferential Statistics (Cochran’s Q, McNemar’s Test, Levene’s Test, Effect Sizes)
+8. Thematic Analysis (Braun & Clarke Method)
+9. Business Intelligence (BI) for SMEs
+10. Human-AI Interaction & Trust
+11. Stakeholder Mapping & Policy Recommendations
 
 ---
 
 ## **6. Machine Learning Operations (MLOps) & Deployment**
 
-### **Computer Vision Model Deployment Across Multiple Platforms**
+### **Deployment of Deep Learning Pipelines via Docker, Azure & Airflow**
 
-Deployed a computer vision model using various MLOps strategies including local execution, Azure ML Studio pipelines, and command-line deployment.
+Developed and deployed a robust deep learning solution for root segmentation and phenotyping across multiple platforms using **end-to-end MLOps workflows**. The project—titled **ROALT (Root Analysis Toolkit)**—was built to bring innovation to plant research through scalable, reproducible, and accessible machine learning infrastructure.
 
-**Programming Languages/Tools:**
 
-* Python
-* Azure ML SDK
-* Docker
-* Bash / CMD
-* Git
+**Project Features**
 
-**AI/Data Science Concepts:**
+- Deployed a **computer vision pipeline** for root segmentation using **FastAPI** and **Gradio**, enabling both REST API access and intuitive UI for end users.
+- Utilized **Docker & Portainer** for containerization, version control, and modular deployment—supporting both GPU-accelerated local inference and cloud compatibility.
+- Managed automated deployment workflows via **Apache Airflow**, including scheduled tasks for data ingestion, model retraining, and batch inference.
+- Integrated with **Azure ML Studio Pipelines** for cloud-based experiment tracking, dataset management, and model versioning.
+- Supported both **batch and single-image inference**, with example notebooks, visualizations, and live demos.
+- Enabled full CI/CD integration via **GitHub Actions**, with automated testing, Docker publishing, and linting (PEP8).
 
-* MLOps Lifecycle
-* Model Versioning & Registry
-* CI/CD for ML
-* Cloud-based Deployment
-* On-Premise Inference Pipelines
+**Programming Languages / Tools**
+
+- **Python 3.12+**
+- **FastAPI** & **Gradio**
+- **Docker**, **Docker Compose**, **Portainer**
+- **Apache Airflow**
+- **Azure ML SDK / ML Studio**
+- **Git**, **GitHub Actions**
+- **Poetry** (environment and dependency management)
+
+**AI / Data Science Concepts**
+
+1. Deep Learning for Computer Vision (CNN-based Segmentation)
+2. Reproducible ML Pipelines (Development → Deployment → Monitoring)
+3. RESTful ML APIs for inference and service integration
+4. MLOps Lifecycle (Model Versioning, CI/CD, Automation)
+5. Web UI interfaces for non-technical users (Gradio)
+6. Workflow Orchestration and Automation (Airflow DAGs)
+
+**Deployment Targets & Interfaces**
+
+| Interface            | Platform          | Purpose                            |
+|----------------------|-------------------|------------------------------------|
+| **Gradio Web UI**     | Localhost (Docker) | Front-end interface for users      |
+| **FastAPI Backend**   | Docker & Azure     | REST API for inference             |
+| **Azure Pipelines**   | Azure ML Studio    | Cloud experiments & model tracking |
+| **Airflow DAGs**      | Local (Docker)     | Pipeline automation (scheduling)   |
+| **Portainer**         | Local              | Visual container management        |
+
+
+This project exemplifies the application of **MLOps best practices** for real-world deep learning deployment and automation, making it suitable for research environments and production-ready systems alike.
 
 ---
 
